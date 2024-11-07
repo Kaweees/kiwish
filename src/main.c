@@ -4,20 +4,8 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "kiwish.h"
-
-#define USAGE_STRING  "Usage: %s [ infile ]\n" /* Program usage string */
-#define MIN_ARGS      1
-#define MAX_ARGS      2
-#define SYSCALL_ERROR -1
-
-/**
- * Prints the proper usage of the program and exits unsuccessfully.
- */
-void usage(char* prog_name) {
-  fprintf(stderr, USAGE_STRING, prog_name);
-  exit(EXIT_FAILURE);
-}
+#include "../include/kiwish.h"
+#include "../include/utils.h"
 
 /**
  * @brief Program entry point
@@ -32,8 +20,7 @@ int main(int argc, char* argv[]) {
   } else if (argc == MAX_ARGS) {
     int infile = open(*(argv + 1), O_RDONLY, S_IRWXU);
     if (infile == SYSCALL_ERROR) {
-      perror("Error opening file");
-      exit(EXIT_FAILURE);
+      panic("Error opening file");
     }
     kiwish(infile, STDOUT_FILENO);
     close(infile);

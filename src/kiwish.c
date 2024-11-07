@@ -1,4 +1,4 @@
-#include "kiwish.h"
+#include "../include/kiwish.h"
 
 #include <fcntl.h>
 #include <stdbool.h>
@@ -7,7 +7,8 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "input.h"
+#include "../include/input.h"
+#include "../include/utils.h"
 
 #define SYSCALL_ERROR -1
 
@@ -19,15 +20,13 @@
 void kiwish(int infile, int outfile) {
   FILE* input_file = fdopen(infile, "r");
   if (input_file == NULL) {
-    perror("Error opening infile as a file stream");
     fclose(input_file);
-    exit(EXIT_FAILURE);
+    panic("Error opening infile as a file stream");
   }
   FILE* output_file = fdopen(infile, "wb");
   if (output_file == NULL) {
-    perror("Error opening outfile as a file stream");
     fclose(output_file);
-    exit(EXIT_FAILURE);
+    panic("Error opening outfile as a file stream");
   }
   InputBufferType* input = createInputBuffer();
 

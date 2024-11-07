@@ -1,6 +1,7 @@
+#pragma once
+
 #include <stdio.h>
-#ifndef INPUT_H
-#define INPUT_H
+
 
 #define PROMPT "kiwish> "
 
@@ -17,6 +18,3 @@ InputBufferType* createInputBuffer();
 void freeInputBuffer(InputBufferType* input);
 void readInput(InputBufferType* input, FILE* file);
 void printPrompt();
-
-#endif /* INPUT_H */
-
